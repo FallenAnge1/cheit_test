@@ -20,9 +20,9 @@ class UserLogs
         $ipdata = json_decode(file_get_contents(
             "http://www.geoplugin.net/json.gp?ip=" . '195.242.114.110'), true);
 
-        // TODO beautify method
         if(array_key_exists('controller', $request->route()->action)) {
             $actionData = explode('@', $request->route()->action['controller']);
+            $actionData[0] = last(explode('\\', $actionData[0]));
         } else {
             $actionData = ['inline', 'handler'];
         }
@@ -32,6 +32,7 @@ class UserLogs
             $requestData['id'] = $request->route('log');
         }
 
+        // TODO delete city and country from data
         $logData = [
             'ip' => $request->ip(),
             'action' => $actionData[1],

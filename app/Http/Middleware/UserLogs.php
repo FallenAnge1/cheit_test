@@ -32,8 +32,7 @@ class UserLogs
             'data' => json_encode($request->all()),
         ];
 
-        $userLog = new UserLog;
-        $userLog = $userLog->create($logData);
+        resolve('App\Services\UserLogService')->store($logData);
 
         return $next($request);
     }

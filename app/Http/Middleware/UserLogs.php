@@ -22,6 +22,11 @@ class UserLogs
 
         $actionData = explode('@', $request->route()->action['controller']);
 
+        $requestData = $request->all();
+        if (!empty($request->route('log'))) {
+            $requestData['id'] = $request->route('log');
+        }
+
         $logData = [
             'ip' => $request->ip(),
             'action' => $actionData[1],
@@ -29,7 +34,7 @@ class UserLogs
             'city' => $ipdata['geoplugin_city'],
             'country' => $ipdata['geoplugin_countryName'],
             'type' => $request->method(),
-            'data' => json_encode($request->all()),
+            'data' => json_encode($requestData),
         ];
 
         resolve('App\Services\UserLogService')->store($logData);

@@ -79,6 +79,18 @@ class UserLogController
         return response()->json(['data' => $log], Response::HTTP_OK);
     }
 
+    public function updateForm($id) {
+        $log = $this->userLogService->show($id);
+
+        if (empty($log)) {
+            return view('welcome');
+        }
+
+        return view('userLogForm', [
+            'log' => $log->toArray(),
+        ]);
+    }
+
     public function destroy($id, Request $request) {
         $rules = array_only($this->userLogService->rules(), ['id']);
 

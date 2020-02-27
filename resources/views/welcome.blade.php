@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="card" style="max-width: 80%;">
+            <div class="card" style="max-width: 100%;">
                 <div class="card-header">Test page 1</div>
                 <div class="list-button">
                     <a href="{{ route('logs.form.create') }}" class="btn btn-success">Add new log</a>
@@ -61,7 +61,12 @@
                         `   <td>${item.country}</td>` +
                         `   <td>${item.type}</td>` +
                         `   <td>${item.created_at}</td>` +
-                        `   <td><button class="btn btn-danger" onclick=deleteLog(${item.id})>Delete</button></td>` +
+                        "   <td>" +
+                        "      <div>" +
+                        `          <button style='display: inline; float: left;' class="btn btn-danger" onclick=deleteLog(${item.id})>Delete</button>` +
+                        `          <a style='display: inline; float: left;' href="/update/${item.id}" class="btn btn-warning" >Update</a>` +
+                        "      </div>" +
+                        "   </td>" +
                         "</tr>"
                     );
                 });

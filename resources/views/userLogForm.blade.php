@@ -8,6 +8,10 @@
                 <form action="">
                     @csrf
 
+                    @if(isset($log))
+                        <input type="hidden" name="id" value="{{ $log['id'] }}">
+                    @endif
+
                     <div class="form-group">
                         <label for="action">Action</label>
                         <input
@@ -17,6 +21,9 @@
                             name="action"
                             id="action"
                             placeholder="Action"
+                            @if(isset($log))
+                            value="{{ $log['action'] }}"
+                            @endif
                         >
                     </div>
                     <div class="form-group">
@@ -28,6 +35,9 @@
                             name="method"
                             id="method"
                             placeholder="Method"
+                            @if(isset($log))
+                            value="{{ $log['method'] }}"
+                            @endif
                         >
                     </div>
                     <div class="form-group">
@@ -39,6 +49,9 @@
                             name="ip"
                             id="ip"
                             placeholder="IP"
+                            @if(isset($log))
+                            value="{{ $log['ip'] }}"
+                            @endif
                         >
                     </div>
                     <div class="form-group">
@@ -49,6 +62,9 @@
                             name="city"
                             id="city"
                             placeholder="City"
+                            @if(isset($log))
+                            value="{{ $log['city'] }}"
+                            @endif
                         >
                     </div>
                     <div class="form-group">
@@ -59,6 +75,9 @@
                             name="country"
                             id="country"
                             placeholder="Country"
+                            @if(isset($log))
+                            value="{{ $log['country'] }}"
+                            @endif
                         >
                     </div>
                     <div class="form-group">
@@ -69,6 +88,9 @@
                             name="type"
                             id="type"
                             placeholder="Type"
+                            @if(isset($log))
+                            value="{{ $log['type'] }}"
+                            @endif
                         >
                     </div>
                     <div class="form-group">
@@ -79,15 +101,54 @@
                             name="data"
                             id="data"
                             placeholder="Data"
+                            @if(isset($log))
+                            value="{{ $log['data'] }}"
+                            @endif
                         >
                     </div>
-                    <input type="button" name="submit" value="Store" class="btn btn-success" onclick="storeLog(this.form)">
+                    <input
+                        type="button"
+                        name="submit"
+                        @if(isset($log))
+                        value="Update"
+                        class="btn btn-warning"
+                        onclick="updateLog(this.form)"
+                        @else
+                        value="Store"
+                        class="btn btn-success"
+                        onclick="storeLog(this.form)"
+                        @endif
+                    >
                 </form>
             </div>
         </div>
     </div>
     <script>
         function storeLog(form) {
+            const data = _readFormData(form);
+
+            $.ajax({
+                method: 'POST',
+                url: "{{ route('logs.store') }}",
+                data,
+                success: () => window.location.replace("{{ route('home') }}"),
+            });
+        }
+
+        function updateLog(form) {
+            const data = _readFormData(form);
+
+            const id = form.id.value;
+
+            $.ajax({
+                method: 'PUT',
+                url: `/api/logs/${id}`,
+                data,
+                success: () => window.location.replace("{{ route('home') }}"),
+            });
+        }
+
+        function _readFormData(form) {
             const data = {};
             data.action = form.action.value;
             data.method = form.method.value;
@@ -98,12 +159,7 @@
             data.data = form.data.value;
             data._token = form._token.value;
 
-            $.ajax({
-                method: 'POST',
-                url: "{{ route('logs.store') }}",
-                data,
-                success: () => window.location.replace("{{ route('home') }}"),
-            });
+            return data;
         }
     </script>
 @endsection

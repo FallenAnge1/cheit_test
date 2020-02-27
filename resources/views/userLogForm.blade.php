@@ -54,6 +54,7 @@
                             @endif
                         >
                     </div>
+                    {{-- TODO remove city and country fields --}}
                     <div class="form-group">
                         <label for="city">City</label>
                         <input

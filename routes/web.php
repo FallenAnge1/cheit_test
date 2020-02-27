@@ -14,3 +14,4 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/create', 'UserLogController@create')->name('logs.form.create');
 Route::get('/update/{id}', 'UserLogController@updateForm')->name('logs.form.update');
+Route::get('/info/{id}', 'UserLogController@get')->name('logs.show');

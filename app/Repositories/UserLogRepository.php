@@ -14,6 +14,8 @@ class UserLogRepository
         return UserLog::find($id);
     }
 
+    // TODO add method for detecting city and country by ip and use it in store/update methods
+
     public function store($request) {
         $log = new UserLog;
         $fields = array_only($request, $log->getFillable());

@@ -39,6 +39,18 @@ class UserLogController
         return response()->json(['data' => $log], Response::HTTP_OK);
     }
 
+    public function get($id) {
+        $log = $this->userLogService->show($id);
+
+        if (empty($log)) {
+            return view('welcome');
+        }
+
+        return view('log', [
+            'log' => $log->toArray(),
+        ]);
+    }
+
     public function store(Request $request) {
         $rules = array_except($this->userLogService->rules(), ['id']);
 

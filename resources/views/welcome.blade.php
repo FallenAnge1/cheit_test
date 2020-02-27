@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container" style="max-width: 90%;">
         <div class="row justify-content-center">
             <div class="card" style="max-width: 100%;">
                 <div class="card-header">Test page 1</div>
@@ -64,7 +64,8 @@
                         "   <td>" +
                         "      <div>" +
                         `          <button style='display: inline; float: left;' class="btn btn-danger" onclick=deleteLog(${item.id})>Delete</button>` +
-                        `          <a style='display: inline; float: left;' href="/update/${item.id}" class="btn btn-warning" >Update</a>` +
+                        `          <a style='display: inline; float: left;' href="/update/${item.id}" class="btn btn-warning">Update</a>` +
+                        `          <a style='display: inline; float: left;' href="/info/${item.id}" class="btn btn-info">Details</a>` +
                         "      </div>" +
                         "   </td>" +
                         "</tr>"

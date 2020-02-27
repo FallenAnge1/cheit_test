@@ -4,7 +4,7 @@
     <div class="container" style="max-width: 90%;">
         <div class="row justify-content-center">
             <div class="card" style="max-width: 100%;">
-                <div class="card-header">Test page 1</div>
+                <div class="card-header">Logs List</div>
                 <div class="list-button">
                     <a href="{{ route('logs.form.create') }}" class="btn btn-success">Add new log</a>
                 </div>

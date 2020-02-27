@@ -14,11 +14,20 @@ class UserLogRepository
         return UserLog::find($id);
     }
 
-    // TODO add method for detecting city and country by ip and use it in store/update methods
+    private function getLocation(&$request) {
+       $ipdata = json_decode(file_get_contents(
+            "http://www.geoplugin.net/json.gp?ip=" . $request['ip']), true);
+
+       $request['city'] = $ipdata['geoplugin_city'];
+       $request['country'] = $ipdata['geoplugin_countryName'];
+    }
 
     public function store($request) {
         $log = new UserLog;
+
         $fields = array_only($request, $log->getFillable());
+
+        $this->getLocation($fields);
 
         $log = $log->create($fields);
 
@@ -33,6 +42,8 @@ class UserLogRepository
         }
 
         $fields = array_only($request, $log->getFillable());
+
+        $this->getLocation($fields);
 
         $log->update($fields);
 

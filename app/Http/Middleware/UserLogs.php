@@ -17,9 +17,6 @@ class UserLogs
      */
     public function handle($request, Closure $next)
     {
-        $ipdata = json_decode(file_get_contents(
-            "http://www.geoplugin.net/json.gp?ip=" . '195.242.114.110'), true);
-
         if(array_key_exists('controller', $request->route()->action)) {
             $actionData = explode('@', $request->route()->action['controller']);
             $actionData[0] = last(explode('\\', $actionData[0]));
@@ -32,13 +29,10 @@ class UserLogs
             $requestData['id'] = $request->route('log');
         }
 
-        // TODO delete city and country from data
         $logData = [
             'ip' => $request->ip(),
             'action' => $actionData[1],
             'method' => $actionData[0],
-            'city' => $ipdata['geoplugin_city'],
-            'country' => $ipdata['geoplugin_countryName'],
             'type' => $request->method(),
             'data' => json_encode($requestData),
         ];

@@ -54,33 +54,6 @@
                             @endif
                         >
                     </div>
-                    {{-- TODO remove city and country fields --}}
-                    <div class="form-group">
-                        <label for="city">City</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="city"
-                            id="city"
-                            placeholder="City"
-                            @if(isset($log))
-                            value="{{ $log['city'] }}"
-                            @endif
-                        >
-                    </div>
-                    <div class="form-group">
-                        <label for="action">Country</label>
-                        <input
-                            type="text"
-                            class="form-control"
-                            name="country"
-                            id="country"
-                            placeholder="Country"
-                            @if(isset($log))
-                            value="{{ $log['country'] }}"
-                            @endif
-                        >
-                    </div>
                     <div class="form-group">
                         <label for="type">Type</label>
                         <input

@@ -5,6 +5,9 @@
         <div class="row justify-content-center">
             <div class="card" style="max-width: 80%;">
                 <div class="card-header">Test page 1</div>
+                <div class="list-button">
+                    <a href="{{ route('logs.form.create') }}" class="btn btn-success">Add new log</a>
+                </div>
                 <table class="table table-borderless" width="80%" id="logs-table">
                     <thead>
                     <tr>
@@ -15,7 +18,6 @@
                         <th>City</th>
                         <th>Country</th>
                         <th>Type</th>
-                        <th>Data</th>
                         <th>Created At</th>
                         <th>Actions</th>
                     </tr>
@@ -58,7 +60,6 @@
                         `   <td>${item.city}</td>` +
                         `   <td>${item.country}</td>` +
                         `   <td>${item.type}</td>` +
-                        `   <td>${item.data}</td>` +
                         `   <td>${item.created_at}</td>` +
                         `   <td><button class="btn btn-danger" onclick=deleteLog(${item.id})>Delete</button></td>` +
                         "</tr>"

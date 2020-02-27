@@ -20,7 +20,11 @@ class UserLogs
         $ipdata = json_decode(file_get_contents(
             "http://www.geoplugin.net/json.gp?ip=" . '195.242.114.110'), true);
 
-        $actionData = explode('@', $request->route()->action['controller']);
+        if(array_key_exists('controller', $request->route()->action)) {
+            $actionData = explode('@', $request->route()->action['controller']);
+        } else {
+            $actionData = ['inline', 'handler'];
+        }
 
         $requestData = $request->all();
         if (!empty($request->route('log'))) {

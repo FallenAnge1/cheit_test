@@ -55,6 +55,10 @@ class UserLogController
         return response()->json(['data' => $log], Response::HTTP_OK);
     }
 
+    public function create() {
+        return view('userLogForm');
+    }
+
     public function update($id, Request $request) {
         $rules = $this->userLogService->rules();
 

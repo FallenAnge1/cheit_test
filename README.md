@@ -1,4 +1,4 @@
-<p align="center">CheIT test task</p>
+<h1 align="center">CheIT test task</h1>
 
 ## Run
 
